@@ -14,30 +14,29 @@ export class SignupFormComponent {
   userStatus: Status = 'NEW_USER';
   userID: number;
 
+  
+  
+
   signupForm = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
+    email: new FormControl(null, [Validators.required, Validators.email , Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
     password: new FormControl(null, Validators.required),
   });
 
   onSubmit() {
-    if (this.userStatus === 'NEW_USER') {
+    console.log(this.signupForm.controls.email);
+    
+    if (this.signupForm.valid) {
       console.log(this.userStatus);
 
       this.userData.push(this.signupForm.value);
     } else {
-      this.userData[this.userID] = this.signupForm.value;
+     window.alert('Login failed')
+     
     }
     this.signupForm.reset();
 
-    this.login = true;
+    
   }
 
-  editFn(data: any, id: number) {
-    console.log(data, id);
-    this.signupForm.patchValue(data);
-    this.userStatus = 'UPDATED_USER';
-    console.log(this.userStatus);
-
-    this.userID = id;
-  }
+ 
 }
