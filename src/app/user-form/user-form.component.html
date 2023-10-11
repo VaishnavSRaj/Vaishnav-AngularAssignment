@@ -1,0 +1,124 @@
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-5 ">
+      <h3>User Form</h3>
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" formControlName="name" class="form-control" id="name" name="name"
+          [ngClass]="{
+            
+            'is-valid': userForm.get('name').valid,
+          'is-invalid': !userForm.get('name').valid && userForm.get('name').touched,
+          }"  >
+          <span [ngClass]="{
+            'valid-feedback': userForm.get('name').valid,
+            'invalid-feedback': !userForm.get('name').valid,
+          }">{{userForm.get('email').valid?'Looks Good':'Enter Username'}}</span>
+        
+        </div>
+      
+       
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" formControlName="email"  id="email" name="email"
+           [ngClass]="{
+            'form-control':true,
+            'is-valid': userForm.get('email').valid,
+          'is-invalid': !userForm.get('email').valid && userForm.get('email').touched,
+          }"  >
+          
+          <span [ngClass]="{
+            'valid-feedback': userForm.get('email').valid,
+            'invalid-feedback': !userForm.get('email').valid,
+          }">{{userForm.get('email').valid?'Looks Good':'Invalid Email Address'}}</span>
+        </div>
+
+        <div class="mb-3">
+          <label for="gender" class="form-label">Gender</label>
+          <select class="form-select" formControlName="gender" id="gender" name="gender"  >
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="datepicker" class="form-label">Date of Birth</label>
+          <input type="date" formControlName="date_of_birth" class="form-control " id="datepicker" name="datepicker"
+           [ngClass]="{'is-valid':this.userForm.controls.date_of_birth.valid && this.userForm.controls.date_of_birth.touched , 
+          'is-invalid': !this.userForm.controls.date_of_birth.valid && this.userForm.controls.date_of_birth.touched}"  >
+
+          <div [ngClass]="{
+          
+            'invalid-feedback': !userForm.get('date_of_birth').valid,
+          }">
+          <span *ngIf="userForm.controls.date_of_birth.errors?.required">Please Enter Your Date of birth</span>
+          <span *ngIf="userForm.controls.date_of_birth.errors?.ageVerification">Age must be above 18</span>
+          
+          <!-- {{userForm.controls.date_of_birth.errors?.required?'Please Enter Your Date of birth':'Age must be above 18'}} -->
+        
+        
+        </div> 
+
+
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input type="tel" formControlName="mobile_number" class="form-control" id="phone" name="phone"
+          [ngClass]="{
+            'form-control':true,
+            
+          'is-invalid': !userForm.get('mobile_number').valid && userForm.get('mobile_number').touched,
+          }"  >
+          <span [ngClass]="{
+            'valid-feedback': userForm.get('mobile_number').valid,
+            'invalid-feedback': !userForm.get('mobile_number').valid,
+          }">{{userForm.controls.mobile_number.errors?.required?'Please Enter Your Mobile Number':'Invalid Mobile Number'}}</span> 
+        </div>
+
+        <div class="mb-3" *ngIf="userForm.value.gender=='male'">
+          <label for="address" class="form-label">Address</label>
+          <textarea class="form-control"  formControlName="address" id="address" name="address"  ></textarea>
+        </div>
+        <span style="color: red;" class="help-block" *ngIf="!userForm.valid && userForm.touched">error</span>
+        
+
+        <button type="submit" class="btn btn-primary" >Submit</button>
+      </form>
+    </div>
+    <div class="col-md-7">
+      <h3>UserData</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of userData index as i">
+            <td>{{ data.name }}</td>
+            <td>{{ data.email }}</td>
+            <td>{{ data.gender }}</td>
+            <td>{{ data.date_of_birth }}</td>
+            <td>{{ data.mobile_number }}</td>
+            <td>{{ data.address }}</td>
+            <td>
+              <i class="fa-solid fa-pen-to-square" (click)="edit(data , i)" style="margin-right: 10px;"></i>
+              <i class="fa-solid fa-trash" (click)="delete(i)"></i>
+            </td>
+            
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
