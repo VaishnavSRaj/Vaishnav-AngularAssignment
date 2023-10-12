@@ -20,7 +20,7 @@ export class SignupFormComponent {
       Validators.email,
       Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
     ]),
-    password: new FormControl(null, Validators.required),
+    password: new FormControl(null, [Validators.required , Validators.minLength(8) , Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/)]),
   });
 
   onSubmit() {

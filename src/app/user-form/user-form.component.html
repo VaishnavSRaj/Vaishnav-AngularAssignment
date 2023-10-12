@@ -1,7 +1,7 @@
 
 <div class="container mt-4">
   <div class="row">
-    <div class="col-md-5 ">
+    <div class="col-md-4 ">
       <h3>User Form</h3>
       <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
@@ -9,13 +9,13 @@
           <input type="text" formControlName="name" class="form-control" id="name" name="name"
           [ngClass]="{
             
-            'is-valid': userForm.get('name').valid,
+            'is-valid': userForm.get('name').valid && userForm.get('name').touched ,
           'is-invalid': !userForm.get('name').valid && userForm.get('name').touched,
           }"  >
-          <span [ngClass]="{
-            'valid-feedback': userForm.get('name').valid,
-            'invalid-feedback': !userForm.get('name').valid,
-          }">{{userForm.get('email').valid?'Looks Good':'Enter Username'}}</span>
+          <div [ngClass]="{
+          'invalid-feedback': !userForm.get('name').valid&& userForm.get('name').touched}">
+             <span *ngIf="userForm.controls.name.errors?.required
+             && userForm.get('name').touched"> Enter Username </span></div>
         
         </div>
       
@@ -29,11 +29,19 @@
             'is-valid': userForm.get('email').valid,
           'is-invalid': !userForm.get('email').valid && userForm.get('email').touched,
           }"  >
+          <div [ngClass]="{
+            'invalid-feedback' : !userForm.controls.email.valid && userForm.get('email').touched
+         }">  <span *ngIf="userForm.controls.email.errors?.required
+         && userForm.get('email').touched">Enter Email Address</span>
+         <span *ngIf="userForm.controls.email.errors?.pattern
+         && userForm.get('email').touched">Invalid Email Address</span>
+         </div>
+      
           
-          <span [ngClass]="{
+          <!-- <span [ngClass]="{
             'valid-feedback': userForm.get('email').valid,
             'invalid-feedback': !userForm.get('email').valid,
-          }">{{userForm.get('email').valid?'Looks Good':'Invalid Email Address'}}</span>
+          }">{{userForm.get('email').valid?'Looks Good':'Invalid Email Address'}}</span> -->
         </div>
 
         <div class="mb-3">
@@ -80,18 +88,18 @@
           }">{{userForm.controls.mobile_number.errors?.required?'Please Enter Your Mobile Number':'Invalid Mobile Number'}}</span> 
         </div>
 
-        <div class="mb-3" *ngIf="userForm.value.gender=='male'">
+        <div class="mb-3" *ngIf="userForm.value.gender!='female'">
           <label for="address" class="form-label">Address</label>
           <textarea class="form-control"  formControlName="address" id="address" name="address"  ></textarea>
         </div>
-        <span style="color: red;" class="help-block" *ngIf="!userForm.valid && userForm.touched">error</span>
+       
         
 
-        <button type="submit" class="btn btn-primary" >Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
-    <div class="col-md-7">
-      <h3>UserData</h3>
+    <div class="col-md-8">
+      <h3>User Data</h3>
       <table class="table table-bordered">
         <thead>
           <tr>

@@ -11,7 +11,11 @@ export class UserFormComponent {
   ngOnInit() {}
   userForm = new FormGroup({
     name: new FormControl(null, [Validators.required]),
-    email: new FormControl(null, [Validators.required, Validators.email]),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.email,
+      Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
+    ]),
     gender: new FormControl('male', [Validators.required]),
     date_of_birth: new FormControl(null, [Validators.required, this.ageCalc]),
     mobile_number: new FormControl(null, [
@@ -26,7 +30,7 @@ export class UserFormComponent {
   userId: number;
 
   onSubmit() {
-    console.log(this.userForm.controls.date_of_birth);
+    console.log(this.userForm.controls.name);
 
     if (this.userForm.valid && this.userStatus == 'NEW_USER') {
       this.userData.push(this.userForm.value);
@@ -60,15 +64,13 @@ export class UserFormComponent {
     } else return null;
   }
 
-  edit(data:any, index: number) {
+  edit(data: any, index: number) {
     console.log(data, index);
     this.userForm.patchValue(data);
     this.userStatus = 'UPDATED_USER';
     this.userId = index;
   }
   delete(index: number) {
-
-    this.userData.splice(index,1)
-    
+    this.userData.splice(index, 1);
   }
 }
