@@ -8,7 +8,7 @@
                 'is-valid': signupForm.get('email').valid,
                 'is-invalid' : !signupForm.get('email').valid && signupForm.get('email').touched
               }">
-             <div [ngClass]="{
+             <div style="margin-bottom: 10px;" [ngClass]="{
                 'invalid-feedback' : !signupForm.controls.email.valid && signupForm.get('email').touched
              }">  <span *ngIf="signupForm.controls.email.errors?.required
              && signupForm.get('email').touched">Enter Email Address</span>
@@ -23,18 +23,30 @@
                 'is-invalid' : !signupForm.get('password').valid && signupForm.get('password').touched
               }">
 
-              <div [ngClass]="{
-                'invalid-feedback' : !signupForm.controls.email.valid && signupForm.get('password').touched
-             }">  <span *ngIf="signupForm.controls.password.errors?.required
-             && signupForm.get('password').touched">Please Enter Password</span>
-             <!-- <span *ngIf="signupForm.controls.email.errors?.pattern
-             && signupForm.get('email').touched">Invalid Email Address</span> -->
-             </div>
+              <div style="margin-bottom: 10px;" [ngClass]="{
+                'invalid-feedback': !signupForm.get('password').valid && signupForm.get('password').touched}">
+                   <span *ngIf="signupForm.controls.password.errors?.required
+                   && signupForm.get('password').touched"> Enter Password </span>
+                   <span *ngIf="signupForm.controls.password.errors?.minlength
+                   && signupForm.get('password').touched"> password must have minimum 8 characters</span>
+                   <span *ngIf="signupForm.controls.password.errors?.pattern
+                   && signupForm.get('password').touched"> password must contain at least one uppercase, one special character and one number, password </span>
+                  
+                  
+                  
+                  </div>
+              <!-- <span *ngIf="signupForm.controls.password.errors?.minlength
+             && signupForm.get('password').touched">Password must have minimum 8 characters</span>
+              <span *ngIf="signupForm.controls.password.errors?.pattern
+             && signupForm.get('password').touched">password must contain at least one uppercase, one special character and one number </span> -->
+           
+             
               <!-- <span class="help-block" *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched">Please enter a password</span> -->
           </div>
           <div>
-              <input type="submit" routerLink="/user-form" value="Login" class="btn">
-             
+              <!-- <input type="submit" routerLink="/user-form" value="Login" class="btn"> -->
+               <input type="submit"  value="Login" class="btn">
+              
           </div>
       </form>
   </div>
