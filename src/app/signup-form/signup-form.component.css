@@ -6,8 +6,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
 }
-
 
 .login-form {
   background-color: #fff;
@@ -19,16 +19,16 @@ body {
   text-align: center;
 }
 
-
 h1 {
-  color: #333;
+  color: #898888;
 }
-
 
 label {
   font-weight: bold;
+  color: #898888;
+  text-align: right;
+  
 }
-
 
 .form-control {
   width: 100%;
@@ -38,12 +38,6 @@ label {
   border-radius: 3px;
 }
 
-
-.help-block {
-  color: red;
-}
-
-
 .btn {
   background-color: #007bff;
   color: #fff;
@@ -52,7 +46,6 @@ label {
   border-radius: 3px;
   cursor: pointer;
 }
-
 
 .btn:hover {
   background-color: #0056b3;

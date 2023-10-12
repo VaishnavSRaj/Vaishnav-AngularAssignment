@@ -34,11 +34,12 @@ export class UserFormComponent {
 
     if (this.userForm.valid && this.userStatus == 'NEW_USER') {
       this.userData.push(this.userForm.value);
+      this.userForm.reset();
       console.log(this.userData);
     } else {
       this.userData[this.userId] = this.userForm.value;
     }
-    this.userForm.reset();
+    
   }
 
   ageCalc(control: FormControl): { [s: string]: boolean } {
