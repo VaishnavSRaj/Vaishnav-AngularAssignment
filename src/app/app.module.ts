@@ -8,15 +8,9 @@ import { ServersComponent } from './servers/servers.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { Routes,RouterModule } from '@angular/router';
 import { SignupFormComponent } from './signup-form/signup-form.component';
+import { AppRoutingModule } from './app-routing.module';
 
-const appRoutes: Routes = [{
-  path:'',
-  component: SignupFormComponent
-},{
-  path:'user-form',
-  component:UserFormComponent
-}
-]
+
 
 @NgModule({
   declarations: [
@@ -33,7 +27,8 @@ const appRoutes: Routes = [{
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
